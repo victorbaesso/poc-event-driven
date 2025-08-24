@@ -2,7 +2,7 @@
 
 ###
 
-<p>Projeto aplicando conceitos de EDA utilizando RabbitMQ como ébroker de mensagens</p>
+<p>Projeto aplicando conceitos de EDA utilizando RabbitMQ como broker de mensagens</p>
 
 ###
 
