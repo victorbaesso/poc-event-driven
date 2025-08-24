@@ -1,0 +1,12 @@
+<% content_for :title, "Editing budget product" %>
+
+<h1>Editing budget product</h1>
+
+<%= render "form", budget_product: @budget_product %>
+
+<br>
+
+<div>
+  <%= link_to "Show this budget product", @budget_product %> |
+  <%= link_to "Back to budget products", budget_products_path %>
+</div>

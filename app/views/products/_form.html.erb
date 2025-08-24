@@ -1,0 +1,19 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <li class="list-group-item" id="<%= dom_id product %>">
+    <div class="input-group">
+      <%= form.text_field :name, placeholder: "Nome do produto", class: "form-control" %>
+      <%= form.submit 'Salvar', class: "btn btn-success" %>
+      <%= link_to 'Cancelar', :back, class: "btn btn-danger" %>
+    </div>
+  </li>
+<% end %>

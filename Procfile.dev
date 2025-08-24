@@ -1,0 +1,4 @@
+web: bin/rails server -b 0.0.0.0
+css: yarn watch:css
+
+budget_approval_consumer: bundle exec rails runner BudgetApprovalConsumer.new.consume

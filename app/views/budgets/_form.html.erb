@@ -1,0 +1,62 @@
+<%= form_with(model: budget, data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }) do |form| %>
+  <% if budget.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+
+      <ul>
+        <% budget.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-2">
+    <%= form.label 'Descrição', style: "display: block", class: 'form-label' %>
+    <%= form.text_field :description, class: 'form-control' %>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= form.label 'Valor', style: "display: block", class: 'form-label' %>
+      <%= form.text_field :value, class: 'form-control' %>
+    </div>
+
+    <div class="col">
+      <%= form.label 'Data de validade', style: "display: block", class: 'form-label' %>
+      <%= form.date_field :deadline, class: 'form-control' %>
+    </div>
+
+    <div class="col">
+      <%= form.label 'Status', style: "display: block", class: 'form-label' %>
+      <%= form.select(:status, { draft: 'Rascunho', submitted: 'Finalizado' }.map { |k, v| [v, k] }, {}, class: 'form-select') %>
+    </div>
+  </div>
+
+  <h2 class="mt-2">Produtos</h2>
+
+  <ul class="list-group" class="my-2">
+    <div class="mb-1">
+      <button type="button" data-action="nested-form#add" class="btn btn-primary btn-sm">Adicionar produto</button>
+    </div>
+    <template data-nested-form-target="template">
+      <%= form.fields_for :items, BudgetProduct.new, child_index: 'NEW_RECORD' do |budget_item| %>
+        <%= render "item", f: budget_item %>
+      <% end %>
+    </template>
+
+    <div>
+      <%= form.fields_for :items do |budget_item| %>
+        <%= render "item", f: budget_item %>
+      <% end %>
+    </div>
+
+    <!-- Inserted elements will be injected before that target. -->
+    <div data-nested-form-target="target"></div>
+  </ul>
+
+  <div class="mt-2">
+    <%= form.submit 'Salvar', class: "btn btn-success" %>
+    <%= link_to "Cancelar", budgets_path, class: "btn btn-danger" %>
+  </div>
+<% end %>

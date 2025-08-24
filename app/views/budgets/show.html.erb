@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<h2><%= @budget.description %></h2>
+
+<div class="mt-2">
+  <p class="badge text-bg-primary"><%= @budget.humanized_status %></p>
+  <p class="fs-5">Valor total: R$<%= @budget.value %></p>
+  <p class="fs-5">Validade: <%= (@budget.deadline || Date.current + 30.day).strftime('%d/%m/%Y') %></p>
+</div>
+
+<ul class="list-group list-hovered">
+  <% @budget.items.each do |item| %>
+    <li class="list-group-item">
+      <%= item.product.name %> - R$<%= item.value %> - <%= item.quantity %> unidade(s)
+    </li>
+  <% end %>
+</ul>
+
+<div class="mt-2 input-group">
+  <%= link_to "Excluir", @budget, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Excluir este orçamento?" }, class: "btn btn-danger btn-sm" %>
+  <%= link_to "Editar", edit_budget_path(@budget), class: "btn btn-primary btn-sm" %>
+  <%= link_to "Voltar", budgets_path, class: "btn btn-secondary btn-sm" %>
+</div>

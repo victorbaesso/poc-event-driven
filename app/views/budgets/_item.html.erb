@@ -1,0 +1,21 @@
+<li class="list-group-item nested-form-wrapper" data-new-record="<%= f.object.new_record? %>">
+  <div class="row">
+    <div class="col-6 pe-0">
+      <div class="input-group">
+        <%= f.label "Produto", class: "input-group-text" %>
+        <%= f.collection_select :product_id, Product.all, :id, :name, { prompt: "Selecione um produto" }, { class: "form-select" } %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= f.label 'Quantidade', class: "input-group-text" %>
+        <%= f.number_field :quantity, min: 1, class: 'form-control' %>
+        <%= f.label 'R$', class: "input-group-text" %>
+        <%= f.number_field :value, min: 0, step: 0.01, class: 'form-control' %>
+        <a type="button" data-action="nested-form#remove" class="btn btn-danger form-control">Remover</a>
+        <%= f.hidden_field :_destroy %>
+        <%= f.hidden_field :id, value: f.object.id %>
+      </div>
+    </div>
+  </div>
+</li>

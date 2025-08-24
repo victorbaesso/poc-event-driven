@@ -1,0 +1,33 @@
+<tr id="<%= dom_id budget %>">
+  <td>
+    <%= budget.description %>
+  </td>
+
+  <td>
+    <%= budget.status %>
+  </td>
+
+  <td>
+    R$<%= budget.value %>
+  </td>
+
+  <td>
+    <%= budget.items.count(:quantity) %> itens
+  </td>
+
+  <td>
+    <%= budget.created_at.strftime('%d/%m/%Y') %>
+  </td>
+
+  <td>
+    <%= (budget.deadline || Date.current + 30.day).strftime('%d/%m/%Y') %>
+  </td>
+
+  <td>
+    <div class="input-group">
+      <%= link_to "Visualizar", budget, class: "btn btn-outline-info btn-sm" %>
+      <%= link_to "Editar", edit_budget_path(budget), class: "btn btn-primary btn-sm" %>
+      <%= link_to "Excluir", budget, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Excluir este orçamento?" }, class: "btn btn-danger btn-sm" %>
+    </div>
+  </td>
+</tr>

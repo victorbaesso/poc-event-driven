@@ -1,0 +1,5 @@
+<% content_for :title, "Editando orçamento" %>
+
+<h2><%= @budget.description.truncate(20) %></h2>
+
+<%= render "form", budget: @budget %>

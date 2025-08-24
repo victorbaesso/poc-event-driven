@@ -1,0 +1,17 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Products" %>
+
+<h2>Produtos</h2>
+
+<%= turbo_frame_tag 'products_form' do %>
+  <%= link_to "Novo produto", new_product_path, class: 'btn btn-primary' %>
+<% end %>
+
+<div class="mt-3">
+  <ul class="list-group" id="products">
+    <% @products.each do |product| %>
+      <%= render product %>
+    <% end %>
+  </ul>
+</div>

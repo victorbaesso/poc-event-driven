@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "product_#{product.id}" do %>
+  <li class="list-group-item">
+    <div class="row justify-content-between">
+      <div class="col"><%= product.name %></div>
+      <div class="col-4 mx-auto">
+        <%= link_to edit_product_path(product), class: "btn btn-sm btn-primary" do %>
+          Editar
+        <% end %>
+        <%= link_to product, method: :delete, data: { turbo_method: :delete, turbo_confirm: "Deseja remover esse item?" },class: "btn btn-sm btn-danger" do %>
+          Remover
+        <% end %>
+      </div>
+    </div>
+  </li>
+<% end %>

@@ -1,0 +1,28 @@
+services:
+  web:
+    container_name: product_manager
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bin/dev
+    tty: true
+    expose:
+      - 3000
+    depends_on:
+      - rabbit
+    ports:
+      - 3000:3000
+    volumes:
+       - .:/rails
+
+  rabbit:
+    container_name: rabbit_mq
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq_data:
